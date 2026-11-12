@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rekha Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Mukta:wght@400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one continuous cream line runs down the page and links every section; content sits on a quiet charcoal ground. Single dark theme by choice (brand world). */
+:root{
+  --ground:#141210; --raised:#1C1916; --line:#F2E8D5; --muted:#A8A091; --rule:#3A352E; --head:#FFF8EC; --water:#5BB8E8;
+  --display:"Fraunces",Georgia,serif; --body:"Inter",system-ui,sans-serif; --deva:"Tiro Devanagari Hindi","Mukta",serif; --deva-ui:"Mukta","Inter",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--line);font-family:var(--body);-webkit-font-smoothing:antialiased}
+body.hi{font-family:var(--deva-ui)}
+a{color:var(--line)}
+:focus-visible{outline:2px solid var(--water);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+#pageline{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:0;overflow:visible}
+main{position:relative}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:300;text-wrap:balance;margin:0}
+body.hi h2,body.hi h3{font-family:var(--deva);font-weight:400}
+h2{font-size:clamp(34px,5vw,56px);line-height:1.05}
+p{line-height:1.6;max-width:62ch;margin:0}
+.muted{color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;position:relative;z-index:2}
+nav .mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .mark svg{width:96px;height:auto}
+nav .links{display:flex;gap:22px;align-items:center;font-size:14px}
+nav .links a{text-decoration:none;color:var(--muted)}
+nav .links a:hover{color:var(--line)}
+.lang{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px}
+.lang button{background:none;border:0;padding:6px 12px;border-radius:999px;font-size:13px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--line);color:var(--ground)}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:56px;align-items:center;padding:40px 0 96px}
+.hero .logo svg{width:100%;height:auto;display:block}
+.hero .lead{display:flex;flex-direction:column;gap:22px}
+.tagline{font-family:var(--deva);font-size:28px;color:#D8CFBE}
+.hero p{font-size:18px;color:#D8CFBE}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;border:1px solid var(--line);background:var(--line);color:var(--ground);font-weight:600;font-size:15px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--line);border-color:var(--rule)}
+.phone{justify-self:center;width:min(300px,100%);aspect-ratio:9/16;border-radius:28px;border:1px solid var(--rule);background:#000;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.phone .badge{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;background:rgba(20,18,16,.75);padding:6px 10px;border-radius:999px}
+/* sections */
+section{padding:96px 0;position:relative}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.step{background:var(--raised);border:1px solid var(--rule);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.step svg{width:100%;height:84px}
+.step h3{font-size:26px}
+/* episodes */
+.ep-main{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:32px;background:var(--raised);border:1px solid var(--rule);border-radius:4px;padding:28px;align-items:center}
+.ep-main img{width:100%;border-radius:4px;display:block;aspect-ratio:9/16;object-fit:cover}
+.ep-body{display:flex;flex-direction:column;gap:18px}
+.ep-body h3{font-size:40px}
+.switch{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;align-self:flex-start}
+.switch button{background:none;border:0;padding:8px 16px;border-radius:999px;font-size:14px;color:var(--muted)}
+.switch button[aria-pressed="true"]{background:var(--line);color:var(--ground)}
+.ending{font-family:var(--display);font-style:italic;font-size:30px;line-height:1.25;min-height:2.6em;color:var(--line)}
+body.hi .ending{font-family:var(--deva);font-style:normal}
+.ending.new{color:var(--water)}
+.meta{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.upcoming{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.up{border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.up .dot{width:12px;height:12px;border-radius:50%;background:var(--line);box-shadow:0 0 0 6px rgba(242,232,213,.12)}
+.up h4{margin:0;font-family:var(--display);font-weight:400;font-size:22px}
+body.hi .up h4{font-family:var(--deva)}
+/* vote */
+.vote{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.opt{position:relative;text-align:left;background:var(--raised);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;overflow:hidden;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.opt .bar{position:absolute;left:0;top:0;bottom:0;background:rgba(91,184,232,.16);width:0;transition:width .6s ease}
+.opt span{position:relative}
+.opt .pc{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.opt[aria-pressed="true"]{border-color:var(--water)}
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+/* brands */
+.brands{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.brands ul{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.brands li{display:flex;gap:12px;align-items:baseline}
+.brands li::before{content:"";width:18px;height:2px;background:var(--line);flex:none;transform:translateY(-4px)}
+form{background:var(--raised);border:1px solid var(--rule);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:14px}
+label{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+input,textarea,select{font:inherit;font-size:15px;color:var(--line);background:var(--ground);border:1px solid var(--rule);border-radius:4px;padding:12px}
+textarea{min-height:96px;resize:vertical}
+.ok{display:none;color:var(--water);font-size:14px}
+/* footer */
+footer{padding:96px 0 64px;text-align:left}
+footer .end{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between}
+.signoff{font-family:var(--deva);font-size:34px}
+.small{font-size:14px;color:var(--muted)}
+@media (max-width:860px){
+  .hero,.brands,.ep-main{grid-template-columns:1fr}
+  .steps,.upcoming{grid-template-columns:1fr}
+  .vote{grid-template-columns:1fr}
+  nav .links a.hide-s{display:none}
+  .ep-main img{max-width:260px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg id="pageline" aria-hidden="true"><path id="pl-faint" fill="none" stroke="#F2E8D5" stroke-opacity=".08" stroke-width="2"></path><path id="pl" fill="none" stroke="#F2E8D5" stroke-width="2.5" stroke-linecap="round"></path><circle id="pl-glow" r="14" fill="#FFF8EC" opacity=".18"></circle><circle id="pl-head" r="5" fill="#FFF8EC"></circle></svg>
+<main>
+<div class="wrap">
+<nav aria-label="Main">
+  <a class="mark" href="#top" aria-label="Rekha Stories home">
+    <svg viewBox="96 120 1010 450" role="img" aria-label="रेखा"><path d="M266 503C263.3 502.2 261.8 507.7 250.0 498.0C238.2 488.3 207.0 457.0 195.0 445.0C183.0 433.0 182.2 432.8 178.0 426.0C173.8 419.2 169.7 409.7 170.0 404.0C170.3 398.3 173.0 395.3 180.0 392.0C187.0 388.7 203.7 388.0 212.0 384.0C220.3 380.0 225.5 373.7 230.0 368.0C234.5 362.3 236.8 356.3 239.0 350.0C241.2 343.7 242.8 342.3 243.0 330.0C243.2 317.7 240.5 285.0 240.0 276.0C239.3 271.7 238.5 260.0 236.0 250.0C233.5 240.0 229.3 226.3 225.0 216.0C220.7 205.7 215.8 196.0 210.0 188.0C204.2 180.0 197.7 173.0 190.0 168.0C182.3 163.0 172.7 159.7 164.0 158.0C155.3 156.3 145.3 159.0 138.0 158.0C130.7 157.0 123.3 154.7 120.0 152.0C116.7 149.3 116.3 144.0 118.0 142.0C119.7 140.0 125.7 138.3 130.0 140.0C134.3 141.7 137.7 147.7 144.0 152.0C150.3 156.3 159.7 161.3 168.0 166.0C176.3 170.7 186.7 173.3 194.0 180.0C201.3 186.7 206.8 196.0 212.0 206.0C217.2 216.0 221.8 228.3 225.0 240.0C228.2 251.7 230.0 270.0 231.0 276.0C220.8 276.0 184.8 276.0 170.0 276.0C155.2 276.0 148.3 276.8 142.0 276.0C135.7 275.2 134.0 273.0 132.0 271.0C130.0 269.0 129.0 265.7 130.0 264.0C131.0 262.3 135.7 260.3 138.0 261.0C140.3 261.7 142.7 265.5 144.0 268.0C145.3 270.5 143.3 274.7 146.0 276.0C148.7 277.3 157.7 276.0 160.0 276.0L580 276L580 394C578.7 390.3 576.0 379.0 572.0 372.0C568.0 365.0 562.0 357.5 556.0 352.0C550.0 346.5 542.7 341.8 536.0 339.0C529.3 336.2 522.8 335.2 516.0 335.0C509.2 334.8 501.7 336.0 495.0 338.0C488.3 340.0 481.2 343.0 476.0 347.0C470.8 351.0 466.8 356.2 464.0 362.0C461.2 367.8 459.5 375.3 459.0 382.0C458.5 388.7 459.2 396.0 461.0 402.0C462.8 408.0 466.0 413.5 470.0 418.0C474.0 422.5 479.2 426.3 485.0 429.0C490.8 431.7 497.5 433.3 505.0 434.0C512.5 434.7 522.0 434.0 530.0 433.0C538.0 432.0 544.7 428.5 553.0 428.0C561.3 427.5 575.5 429.7 580.0 430.0L580 484C576.0 484.8 564.0 487.0 556.0 489.0C548.0 491.0 541.3 494.0 532.0 496.0C522.7 498.0 512.0 500.3 500.0 501.0C488.0 501.7 472.5 501.7 460.0 500.0C447.5 498.3 436.3 495.3 425.0 491.0C413.7 486.7 402.5 480.8 392.0 474.0C381.5 467.2 369.3 457.0 362.0 450.0C354.7 443.0 351.7 438.3 348.0 432.0C344.3 425.7 340.3 418.3 340.0 412.0C339.7 405.7 340.7 398.3 346.0 394.0C351.3 389.7 365.0 390.0 372.0 386.0C379.0 382.0 384.0 375.7 388.0 370.0C392.0 364.3 394.2 358.7 396.0 352.0C397.8 345.3 399.5 342.7 399.0 330.0C398.5 317.3 394.0 285.0 393.0 276.0L689 276L689 486C689 540 744 556 806 524C870 490 940 330 1070 304" fill="none" stroke="#F2E8D5" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="1070" cy="304" r="26" fill="#FFF8EC"></circle></svg>
+  </a>
+  <div class="links">
+    <a class="hide-s" href="#episodes" data-en="Episodes" data-hi="कहानियाँ">Episodes</a>
+    <a class="hide-s" href="#brands" data-en="For brands" data-hi="ब्रांड्स के लिए">For brands</a>
+    <div class="lang" role="group" aria-label="Language"><button id="b-en" aria-pressed="true">EN</button><button id="b-hi" aria-pressed="false">हिंदी</button></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="lead">
+    <div class="logo"><svg id="hero-logo" viewBox="96 110 1010 470" role="img" aria-label="रेखा, written in one line"><path id="hl-glow" d="M266 503C263.3 502.2 261.8 507.7 250.0 498.0C238.2 488.3 207.0 457.0 195.0 445.0C183.0 433.0 182.2 432.8 178.0 426.0C173.8 419.2 169.7 409.7 170.0 404.0C170.3 398.3 173.0 395.3 180.0 392.0C187.0 388.7 203.7 388.0 212.0 384.0C220.3 380.0 225.5 373.7 230.0 368.0C234.5 362.3 236.8 356.3 239.0 350.0C241.2 343.7 242.8 342.3 243.0 330.0C243.2 317.7 240.5 285.0 240.0 276.0C239.3 271.7 238.5 260.0 236.0 250.0C233.5 240.0 229.3 226.3 225.0 216.0C220.7 205.7 215.8 196.0 210.0 188.0C204.2 180.0 197.7 173.0 190.0 168.0C182.3 163.0 172.7 159.7 164.0 158.0C155.3 156.3 145.3 159.0 138.0 158.0C130.7 157.0 123.3 154.7 120.0 152.0C116.7 149.3 116.3 144.0 118.0 142.0C119.7 140.0 125.7 138.3 130.0 140.0C134.3 141.7 137.7 147.7 144.0 152.0C150.3 156.3 159.7 161.3 168.0 166.0C176.3 170.7 186.7 173.3 194.0 180.0C201.3 186.7 206.8 196.0 212.0 206.0C217.2 216.0 221.8 228.3 225.0 240.0C228.2 251.7 230.0 270.0 231.0 276.0C220.8 276.0 184.8 276.0 170.0 276.0C155.2 276.0 148.3 276.8 142.0 276.0C135.7 275.2 134.0 273.0 132.0 271.0C130.0 269.0 129.0 265.7 130.0 264.0C131.0 262.3 135.7 260.3 138.0 261.0C140.3 261.7 142.7 265.5 144.0 268.0C145.3 270.5 143.3 274.7 146.0 276.0C148.7 277.3 157.7 276.0 160.0 276.0L580 276L580 394C578.7 390.3 576.0 379.0 572.0 372.0C568.0 365.0 562.0 357.5 556.0 352.0C550.0 346.5 542.7 341.8 536.0 339.0C529.3 336.2 522.8 335.2 516.0 335.0C509.2 334.8 501.7 336.0 495.0 338.0C488.3 340.0 481.2 343.0 476.0 347.0C470.8 351.0 466.8 356.2 464.0 362.0C461.2 367.8 459.5 375.3 459.0 382.0C458.5 388.7 459.2 396.0 461.0 402.0C462.8 408.0 466.0 413.5 470.0 418.0C474.0 422.5 479.2 426.3 485.0 429.0C490.8 431.7 497.5 433.3 505.0 434.0C512.5 434.7 522.0 434.0 530.0 433.0C538.0 432.0 544.7 428.5 553.0 428.0C561.3 427.5 575.5 429.7 580.0 430.0L580 484C576.0 484.8 564.0 487.0 556.0 489.0C548.0 491.0 541.3 494.0 532.0 496.0C522.7 498.0 512.0 500.3 500.0 501.0C488.0 501.7 472.5 501.7 460.0 500.0C447.5 498.3 436.3 495.3 425.0 491.0C413.7 486.7 402.5 480.8 392.0 474.0C381.5 467.2 369.3 457.0 362.0 450.0C354.7 443.0 351.7 438.3 348.0 432.0C344.3 425.7 340.3 418.3 340.0 412.0C339.7 405.7 340.7 398.3 346.0 394.0C351.3 389.7 365.0 390.0 372.0 386.0C379.0 382.0 384.0 375.7 388.0 370.0C392.0 364.3 394.2 358.7 396.0 352.0C397.8 345.3 399.5 342.7 399.0 330.0C398.5 317.3 394.0 285.0 393.0 276.0L689 276L689 486C689 540 744 556 806 524C870 490 940 330 1070 304" fill="none" stroke="#F2E8D5" stroke-opacity=".1" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"></path><path id="hl" d="M266 503C263.3 502.2 261.8 507.7 250.0 498.0C238.2 488.3 207.0 457.0 195.0 445.0C183.0 433.0 182.2 432.8 178.0 426.0C173.8 419.2 169.7 409.7 170.0 404.0C170.3 398.3 173.0 395.3 180.0 392.0C187.0 388.7 203.7 388.0 212.0 384.0C220.3 380.0 225.5 373.7 230.0 368.0C234.5 362.3 236.8 356.3 239.0 350.0C241.2 343.7 242.8 342.3 243.0 330.0C243.2 317.7 240.5 285.0 240.0 276.0C239.3 271.7 238.5 260.0 236.0 250.0C233.5 240.0 229.3 226.3 225.0 216.0C220.7 205.7 215.8 196.0 210.0 188.0C204.2 180.0 197.7 173.0 190.0 168.0C182.3 163.0 172.7 159.7 164.0 158.0C155.3 156.3 145.3 159.0 138.0 158.0C130.7 157.0 123.3 154.7 120.0 152.0C116.7 149.3 116.3 144.0 118.0 142.0C119.7 140.0 125.7 138.3 130.0 140.0C134.3 141.7 137.7 147.7 144.0 152.0C150.3 156.3 159.7 161.3 168.0 166.0C176.3 170.7 186.7 173.3 194.0 180.0C201.3 186.7 206.8 196.0 212.0 206.0C217.2 216.0 221.8 228.3 225.0 240.0C228.2 251.7 230.0 270.0 231.0 276.0C220.8 276.0 184.8 276.0 170.0 276.0C155.2 276.0 148.3 276.8 142.0 276.0C135.7 275.2 134.0 273.0 132.0 271.0C130.0 269.0 129.0 265.7 130.0 264.0C131.0 262.3 135.7 260.3 138.0 261.0C140.3 261.7 142.7 265.5 144.0 268.0C145.3 270.5 143.3 274.7 146.0 276.0C148.7 277.3 157.7 276.0 160.0 276.0L580 276L580 394C578.7 390.3 576.0 379.0 572.0 372.0C568.0 365.0 562.0 357.5 556.0 352.0C550.0 346.5 542.7 341.8 536.0 339.0C529.3 336.2 522.8 335.2 516.0 335.0C509.2 334.8 501.7 336.0 495.0 338.0C488.3 340.0 481.2 343.0 476.0 347.0C470.8 351.0 466.8 356.2 464.0 362.0C461.2 367.8 459.5 375.3 459.0 382.0C458.5 388.7 459.2 396.0 461.0 402.0C462.8 408.0 466.0 413.5 470.0 418.0C474.0 422.5 479.2 426.3 485.0 429.0C490.8 431.7 497.5 433.3 505.0 434.0C512.5 434.7 522.0 434.0 530.0 433.0C538.0 432.0 544.7 428.5 553.0 428.0C561.3 427.5 575.5 429.7 580.0 430.0L580 484C576.0 484.8 564.0 487.0 556.0 489.0C548.0 491.0 541.3 494.0 532.0 496.0C522.7 498.0 512.0 500.3 500.0 501.0C488.0 501.7 472.5 501.7 460.0 500.0C447.5 498.3 436.3 495.3 425.0 491.0C413.7 486.7 402.5 480.8 392.0 474.0C381.5 467.2 369.3 457.0 362.0 450.0C354.7 443.0 351.7 438.3 348.0 432.0C344.3 425.7 340.3 418.3 340.0 412.0C339.7 405.7 340.7 398.3 346.0 394.0C351.3 389.7 365.0 390.0 372.0 386.0C379.0 382.0 384.0 375.7 388.0 370.0C392.0 364.3 394.2 358.7 396.0 352.0C397.8 345.3 399.5 342.7 399.0 330.0C398.5 317.3 394.0 285.0 393.0 276.0L689 276L689 486C689 540 744 556 806 524C870 490 940 330 1070 304" fill="none" stroke="#F2E8D5" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"></path><circle id="hh-glow" cx="1070" cy="304" r="34" fill="#FFF8EC" opacity=".18"></circle><circle id="hh" cx="1070" cy="304" r="15" fill="#FFF8EC"></circle></svg></div>
+    <div class="tagline">एक रेखा। एक कहानी।</div>
+    <p data-en="Fables you grew up with, drawn as one continuous line, with an ending for today. A new story every Monday, Wednesday and Friday." data-hi="वो कहानियाँ जो आप बचपन से जानते हैं, एक ही रेखा में बनी हुई, और आज के ज़माने का अंत। हर सोमवार, बुधवार और शुक्रवार एक नई कहानी।">Fables you grew up with, drawn as one continuous line, with an ending for today. A new story every Monday, Wednesday and Friday.</p>
+    <div class="ctas">
+      <a class="btn" href="#episodes" data-en="Watch EP01" data-hi="EP01 देखें">Watch EP01</a>
+      <a class="btn ghost" href="#vote" data-en="Pick the next story" data-hi="अगली कहानी चुनें">Pick the next story</a>
+    </div>
+  </div>
+  <div class="phone"><video src="ep01.mp4" poster="ep01-poster.jpg" muted loop playsinline autoplay controls aria-label="Episode 1, The Thirsty Crow"></video><div class="badge">EP 01 · 0:50</div></div>
+</header>
+
+<section id="how">
+  <div class="sec-head"><div class="tag" data-en="How a Rekha story works" data-hi="रेखा की कहानी कैसे बनती है">How a Rekha story works</div><h2 data-en="Three rules, every episode" data-hi="हर कहानी, तीन नियम">Three rules, every episode</h2></div>
+  <div class="steps">
+    <div class="step"><svg viewBox="0 0 300 84" aria-hidden="true"><path d="M10 60 C60 60 70 20 120 20 C170 20 160 70 210 70 C250 70 260 40 288 40" fill="none" stroke="#F2E8D5" stroke-width="3" stroke-linecap="round"></path><circle cx="288" cy="40" r="6" fill="#FFF8EC"></circle></svg><div class="tag">01</div><h3 data-en="A story you know" data-hi="जानी-पहचानी कहानी">A story you know</h3><p class="muted" data-en="Panchatantra, Jataka, Aesop, Tenali Raman. The plot is familiar, so all your attention goes to the line." data-hi="पंचतंत्र, जातक, ईसप, तेनाली रामन। कहानी जानी-पहचानी है, इसलिए सारा ध्यान रेखा पर जाता है।">Panchatantra, Jataka, Aesop, Tenali Raman. The plot is familiar, so all your attention goes to the line.</p></div>
+    <div class="step"><svg viewBox="0 0 300 84" aria-hidden="true"><path d="M10 70 L60 70 C80 70 80 20 110 20 C140 20 130 60 160 60 C190 60 200 14 230 14 C260 14 250 70 288 70" fill="none" stroke="#F2E8D5" stroke-width="3" stroke-linecap="round"></path></svg><div class="tag">02</div><h3 data-en="One line, never lifted" data-hi="एक रेखा, कभी नहीं टूटती">One line, never lifted</h3><p class="muted" data-en="Every frame is drawn by a single stroke. No cuts. When the story looks back, the line rewinds." data-hi="हर फ़्रेम एक ही रेखा से बनता है। कोई कट नहीं। जब कहानी पीछे देखती है, रेखा वापस लौटती है।">Every frame is drawn by a single stroke. No cuts. When the story looks back, the line rewinds.</p></div>
+    <div class="step"><svg viewBox="0 0 300 84" aria-hidden="true"><path d="M10 50 C80 50 120 50 150 50" fill="none" stroke="#F2E8D5" stroke-width="3" stroke-linecap="round"></path><path d="M150 50 C190 50 230 20 288 26" fill="none" stroke="#5BB8E8" stroke-width="3" stroke-linecap="round"></path><circle cx="288" cy="26" r="6" fill="#5BB8E8"></circle></svg><div class="tag">03</div><h3 data-en="An ending for today" data-hi="आज का अंत">An ending for today</h3><p class="muted" data-en="The last beat turns the old moral toward phones, cities, climate and money. The line takes on one colour, once." data-hi="आख़िरी पल में पुरानी सीख आज की ज़िंदगी से जुड़ती है: फ़ोन, शहर, मौसम, पैसा। रेखा सिर्फ़ एक बार रंग बदलती है।">The last beat turns the old moral toward phones, cities, climate and money. The line takes on one colour, once.</p></div>
+  </div>
+</section>
+
+<section id="episodes">
+  <div class="sec-head"><div class="tag" data-en="Episodes" data-hi="कहानियाँ">Episodes</div><h2 data-en="Old fable, new ending" data-hi="पुरानी कहानी, नया अंत">Old fable, new ending</h2></div>
+  <div class="ep-main">
+    <img src="ep01-poster.jpg" alt="The water line turns blue as the crow drinks, in Rekha episode 1">
+    <div class="ep-body">
+      <div class="tag">EP 01 · Aesop / Panchatantra · 0:50</div>
+      <h3 data-en="The Thirsty Crow" data-hi="प्यासा कौआ">The Thirsty Crow</h3>
+      <p class="muted" data-en="A crow finds a pot with too little water and drops pebbles until it can drink. You know this one. Switch the ending." data-hi="एक कौए को घड़े में थोड़ा-सा पानी मिलता है, और वो कंकड़ डालता है जब तक पानी ऊपर न आ जाए। ये कहानी आप जानते हैं। अंत बदलकर देखिए।">A crow finds a pot with too little water and drops pebbles until it can drink. You know this one. Switch the ending.</p>
+      <div class="switch" role="group" aria-label="Choose ending"><button id="e-old" aria-pressed="false" data-en="Old ending" data-hi="पुराना अंत">Old ending</button><button id="e-new" aria-pressed="true" data-en="New ending" data-hi="नया अंत">New ending</button></div>
+      <div class="ending new" id="ending" aria-live="polite">The crow was clever. We just left it fewer pots.</div>
+      <div class="meta"><span data-en="Premieres 14 Dec 2026" data-hi="प्रीमियर 14 दिसंबर 2026">Premieres 14 Dec 2026</span><span>YouTube · Instagram · Facebook</span></div>
+    </div>
+  </div>
+  <div class="upcoming">
+    <div class="up"><div class="dot"></div><div class="tag">EP 02 · Wed 16 Dec</div><h4 data-en="The Hare and the Tortoise" data-hi="ख़रगोश और कछुआ">The Hare and the Tortoise</h4><p class="muted" data-en="The rematch. This time both stop to film it." data-hi="दोबारा दौड़। इस बार दोनों रुककर वीडियो बनाते हैं।">The rematch. This time both stop to film it.</p></div>
+    <div class="up"><div class="dot"></div><div class="tag">EP 03 · Fri 18 Dec</div><h4 data-en="The Monkey and the Crocodile" data-hi="बंदर और मगरमच्छ">The Monkey and the Crocodile</h4><p class="muted" data-en="He kept his heart in the tree. We keep ours somewhere else." data-hi="उसने अपना दिल पेड़ पर रखा था। हम कहीं और रखते हैं।">He kept his heart in the tree. We keep ours somewhere else.</p></div>
+    <div class="up"><div class="dot"></div><div class="tag">EP 04 · Mon 21 Dec</div><h4 data-en="The Blue Jackal" data-hi="नीला सियार">The Blue Jackal</h4><p class="muted" data-en="One jackal dyed himself blue. Then everyone did." data-hi="एक सियार नीला हो गया। फिर सब हो गए।">One jackal dyed himself blue. Then everyone did.</p></div>
+  </div>
+</section>
+
+<section id="vote">
+  <div class="sec-head"><div class="tag" data-en="You choose" data-hi="आप चुनिए">You choose</div><h2 data-en="Which story should the line draw next?" data-hi="रेखा अगली कौन-सी कहानी बनाए?">Which story should the line draw next?</h2></div>
+  <div class="vote" id="vote-opts"></div>
+  <p class="note" data-en="Demo: votes stay in this browser and are not counted yet." data-hi="डेमो: वोट अभी सिर्फ़ इस ब्राउज़र में हैं, गिने नहीं जा रहे।">Demo: votes stay in this browser and are not counted yet.</p>
+</section>
+
+<section id="brands" class="brands">
+  <div>
+    <div class="sec-head" style="margin-bottom:0"><div class="tag" data-en="For brands" data-hi="ब्रांड्स के लिए">For brands</div><h2 data-en="Your brand, in one line" data-hi="आपका ब्रांड, एक रेखा में">Your brand, in one line</h2></div>
+    <p class="muted" style="margin-top:18px" data-en="The same craft, for your launch or campaign. We draw your product, your origin story or your festival message as one continuous line, in vertical and widescreen." data-hi="यही कारीगरी, आपके लॉन्च या कैंपेन के लिए। आपका प्रोडक्ट, आपकी कहानी या त्योहार का संदेश, एक ही रेखा में, वर्टिकल और वाइडस्क्रीन दोनों में।">The same craft, for your launch or campaign. We draw your product, your origin story or your festival message as one continuous line, in vertical and widescreen.</p>
+    <ul>
+      <li data-en="Launch films, 30 to 60 seconds" data-hi="लॉन्च फ़िल्म, 30 से 60 सेकंड">Launch films, 30 to 60 seconds</li>
+      <li data-en="Brand origin stories" data-hi="ब्रांड की शुरुआत की कहानी">Brand origin stories</li>
+      <li data-en="Festive and seasonal spots" data-hi="त्योहार और सीज़न के स्पॉट">Festive and seasonal spots</li>
+      <li data-en="Animated logos that write themselves" data-hi="ख़ुद लिखने वाले एनिमेटेड लोगो">Animated logos that write themselves</li>
+    </ul>
+  </div>
+  <form id="brief" novalidate>
+    <label for="f-name"><span data-en="Your name" data-hi="आपका नाम">Your name</span><input id="f-name" name="name" required autocomplete="name"></label>
+    <label for="f-brand"><span data-en="Brand" data-hi="ब्रांड">Brand</span><input id="f-brand" name="brand" required></label>
+    <label for="f-email"><span data-en="Work email" data-hi="ईमेल">Work email</span><input id="f-email" name="email" type="email" required autocomplete="email"></label>
+    <label for="f-need"><span data-en="What do you need?" data-hi="आपको क्या चाहिए?">What do you need?</span><select id="f-need" name="need"><option>Launch film</option><option>Origin story</option><option>Festive spot</option><option>Animated logo</option></select></label>
+    <label for="f-msg"><span data-en="Tell us about it" data-hi="थोड़ा बताइए">Tell us about it</span><textarea id="f-msg" name="msg"></textarea></label>
+    <button class="btn" type="submit" style="align-self:flex-start" data-en="Send brief" data-hi="ब्रीफ़ भेजें">Send brief</button>
+    <div class="ok" id="ok" role="status" data-en="Demo only: this form isn't connected yet, so nothing was sent." data-hi="सिर्फ़ डेमो: ये फ़ॉर्म अभी जुड़ा नहीं है, कुछ भेजा नहीं गया।">Demo only: this form isn't connected yet, so nothing was sent.</div>
+  </form>
+</section>
+
+<footer>
+  <div class="end">
+    <div class="signoff">एक रेखा। एक कहानी।</div>
+    <div class="small">@rekhastories · YouTube · Instagram · Facebook<br>rekhastories.com</div>
+  </div>
+</footer>
+</div>
+</main>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ease = function(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+  /* hero: the bindu writes रेखा in one line */
+  var hl=document.getElementById('hl'), hg=document.getElementById('hl-glow'), hh=document.getElementById('hh'), hhg=document.getElementById('hh-glow');
+  var L=hl.getTotalLength();
+  function setHero(u){var d=L*(1-u);[hl,hg].forEach(function(p){p.style.strokeDasharray=L+' '+L;p.style.strokeDashoffset=d});var pt=hl.getPointAtLength(L*u);[hh,hhg].forEach(function(c){c.setAttribute('cx',pt.x);c.setAttribute('cy',pt.y)});}
+  if(!reduce){var t0=null,DUR=4200,DELAY=500;function step(ts){if(t0===null)t0=ts;var u=Math.min(1,Math.max(0,(ts-t0-DELAY)/DUR));setHero(ease(u));if(u<1)requestAnimationFrame(step);else{[hl,hg].forEach(function(p){p.style.strokeDasharray='none'});}}setHero(0);requestAnimationFrame(step);}
+  /* the page line: one path through every section, drawn as you scroll */
+  var svg=document.getElementById('pageline'), pl=document.getElementById('pl'), pf=document.getElementById('pl-faint'), head=document.getElementById('pl-head'), glow=document.getElementById('pl-glow'), PL=0;
+  function build(){
+    var W=document.documentElement.clientWidth, H=document.documentElement.scrollHeight;
+    svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var inner=Math.min(1120,W)-48, left=Math.max(10,(W-inner)/2-28), right=W-left;
+    var secs=['how','episodes','vote','brands'].map(function(id){return document.getElementById(id)});
+    var hero=document.getElementById('top').getBoundingClientRect(), sy=window.scrollY;
+    var y=hero.bottom+sy-30, x=right, d='M'+(W/2)+' '+(y-10)+' C'+(W*0.7)+' '+(y-10)+' '+right+' '+(y)+' '+right+' '+(y+40);
+    secs.forEach(function(s,i){var r=s.getBoundingClientRect(), top=r.top+sy+40, bot=r.bottom+sy-10, nx=(i%2===0)?left:right;
+      d+=' L'+x+' '+(bot-80)+' C'+x+' '+(bot)+' '+nx+' '+(bot-30)+' '+nx+' '+(bot+40);x=nx;});
+    var f=document.querySelector('footer').getBoundingClientRect();var fy=f.top+sy+60;
+    d+=' L'+x+' '+fy+' C'+x+' '+(fy+60)+' '+(W/2)+' '+(fy+40)+' '+(W/2)+' '+(fy+90);
+    pl.setAttribute('d',d);pf.setAttribute('d',d);PL=pl.getTotalLength();pl.style.strokeDasharray=PL+' '+PL;onScroll();
+  }
+  function onScroll(){
+    if(!PL)return;var max=document.documentElement.scrollHeight-window.innerHeight;var u=max>0?Math.min(1,Math.max(0,window.scrollY/max)):1;
+    var len=PL*(0.04+0.96*u);pl.style.strokeDashoffset=PL-len;var p=pl.getPointAtLength(len);head.setAttribute('cx',p.x);head.setAttribute('cy',p.y);glow.setAttribute('cx',p.x);glow.setAttribute('cy',p.y);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',build);window.addEventListener('load',build);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);build();
+  /* language */
+  var lang='en';
+  var endings={en:{old:'The crow drank and flew away. Where there is a will, there is a way.',neu:'The crow was clever. We just left it fewer pots.'},hi:{old:'कौए ने पानी पिया और उड़ गया। जहाँ चाह, वहाँ राह।',neu:'कौआ समझदार था। बस हमने उसके लिए घड़े कम छोड़े।'}};
+  var which='neu';
+  function renderEnding(){var e=document.getElementById('ending');e.textContent=endings[lang][which];e.classList.toggle('new',which==='neu');document.getElementById('e-old').setAttribute('aria-pressed',which==='old');document.getElementById('e-new').setAttribute('aria-pressed',which==='neu');}
+  document.getElementById('e-old').onclick=function(){which='old';renderEnding()};document.getElementById('e-new').onclick=function(){which='neu';renderEnding()};
+  function setLang(l){lang=l;document.documentElement.lang=l;document.body.classList.toggle('hi',l==='hi');document.querySelectorAll('[data-en]').forEach(function(el){el.textContent=el.getAttribute('data-'+l)});document.getElementById('b-en').setAttribute('aria-pressed',l==='en');document.getElementById('b-hi').setAttribute('aria-pressed',l==='hi');renderEnding();renderVote();setTimeout(build,50);}
+  document.getElementById('b-en').onclick=function(){setLang('en')};document.getElementById('b-hi').onclick=function(){setLang('hi')};
+  /* vote (demo counts, kept in this browser only) */
+  var opts=[{id:'tortoise',en:'The Talkative Tortoise',hi:'बातूनी कछुआ',n:184},{id:'grapes',en:'The Fox and the Grapes',hi:'लोमड़ी और अंगूर',n:142},{id:'wolf',en:'The Boy Who Cried Wolf',hi:'भेड़िया आया',n:121},{id:'khichdi',en:"Birbal's Khichdi",hi:'बीरबल की खिचड़ी',n:97}];
+  var mine=null;try{mine=localStorage.getItem('rekha-vote')}catch(e){}
+  function renderVote(){var box=document.getElementById('vote-opts');box.innerHTML='';var tot=opts.reduce(function(a,o){return a+o.n+(mine===o.id?1:0)},0);
+    opts.forEach(function(o){var b=document.createElement('button');b.className='opt';b.setAttribute('aria-pressed',mine===o.id);var n=o.n+(mine===o.id?1:0),pc=Math.round(n/tot*100);
+      b.innerHTML='<div class="bar"></div><span></span><span class="pc"></span>';b.children[1].textContent=o[lang];b.children[2].textContent=mine?pc+'%':(lang==='hi'?'वोट करें':'Vote');
+      b.onclick=function(){mine=o.id;try{localStorage.setItem('rekha-vote',o.id)}catch(e){}renderVote()};box.appendChild(b);
+      if(mine){requestAnimationFrame(function(){b.children[0].style.width=pc+'%'});}});}
+  renderVote();
+  document.getElementById('brief').addEventListener('submit',function(e){e.preventDefault();document.getElementById('ok').style.display='block'});
+})();
+</script>
+</body>
+</html>
